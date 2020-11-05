@@ -63,9 +63,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = true;
 $db['default'] = array(
-        'hostname' => "tabeldata.ip-dynamic.com",
+        'hostname' => "localhost",
         'username' => 'root',
-        'password' => 'passwordnyaRoot',
+        'password' => '',
         'database' => 'bmt_v2',
         'dbdriver' => 'mysqli',
         'dbprefix' => '',
