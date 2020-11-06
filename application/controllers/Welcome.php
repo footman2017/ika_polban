@@ -25,7 +25,7 @@ class Welcome extends CI_Controller {
 	
 	function index()
 	{
-        $this->authlib->cekmain();  //function untuk cek autentifikasi
+        $this->authlib->cekmain();  //function untuk cek autentifikasi ke Authlib.php
         //function untuk mengambil menu dari database
         $data['menunya'] = $this->authlib->loadMenu('0',$this->nama_group,$this->menuact,$this->menuactsub);
         $data['tema'] = 'vader';
