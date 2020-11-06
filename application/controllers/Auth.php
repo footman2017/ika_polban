@@ -25,6 +25,7 @@ class Auth extends CI_Controller {
         $this->load->view('auth',$data);
 	}
 
+    //function untuk melalukan proses login
     function login()
 	{
 		//$login = array($this->input->post('username'), $this->input->post('password'), $this->input->post('cabang'));

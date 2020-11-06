@@ -102,7 +102,7 @@ class Authlib {
             }
         }
 	}
-	//---- Fungsi Login
+	//---- Fungsi Login dan menset data session
     function login($login = NULL)
 	{
 		if(!isset($login))

@@ -25,11 +25,13 @@ class Welcome extends CI_Controller {
 	
 	function index()
 	{
-		$this->authlib->cekmain();
+        $this->authlib->cekmain();  //function untuk cek autentifikasi
+        //function untuk mengambil menu dari database
         $data['menunya'] = $this->authlib->loadMenu('0',$this->nama_group,$this->menuact,$this->menuactsub);
         $data['tema'] = 'vader';
-        $this->load->view('welcome',$data);
-	}
+        $this->load->view('welcome',$data); //memanggil view welcome.php dan mengirimkan $data ke view tersebut
+    }
+    
     function get_session()
     {
         $ff			= $this->input->post('ff'); // Jenis Filter
