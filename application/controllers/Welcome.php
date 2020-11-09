@@ -25,8 +25,8 @@ class Welcome extends CI_Controller {
 	
 	function index()
 	{
-        $this->authlib->cekmain();  //function untuk cek autentifikasi ke Authlib.php
-        //function untuk mengambil menu dari database
+        $this->authlib->cekmain();  //function untuk cek autentifikasi ini ada di Authlib.php
+        //function untuk mengambil menu dari database ini ada di Authlib.php pada function loadMenu
         $data['menunya'] = $this->authlib->loadMenu('0',$this->nama_group,$this->menuact,$this->menuactsub);
         $data['tema'] = 'vader';
         $this->load->view('welcome',$data); //memanggil view welcome.php dan mengirimkan $data ke view tersebut
