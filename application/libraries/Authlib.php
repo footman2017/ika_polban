@@ -20,7 +20,8 @@ class Authlib {
 		$this->CI->load->helper('url');
 		$this->CI->load->library('encrypt');
 		
-	}
+    }
+    //query untuk mengambil menu-menunya
 	function getAllMenu($parent)
 	{
 		$query = $this->CI->db->query( "SELECT `menu_id`,`nama`,`href`,`icon`,`parent`,`groups`,`css`,`sub`
@@ -28,7 +29,9 @@ class Authlib {
 				WHERE parent='$parent' AND `active` = '1'
 				ORDER BY `urutan`" );
 				return ($query -> num_rows() > 0) ? $query->result_array() : FALSE;
-	}
+    }
+    
+    //Fungsi load menu, dan mengatur menu mana yang sedang aktif
 	function loadMenu($parent,$namagroup,$menuact,$menuactsub){
 		$hasil = $this->getAllMenu($parent);
 		if ($hasil)
@@ -254,14 +257,14 @@ class Authlib {
                                        ON t1.id_pegawai = t2.pegawai_id
                                        WHERE username = '$username'
                                       ");
-		if ($query->num_rows() == 1) {
+		if ($query->num_rows() == 1) {  //pengecekan apakah ada user sesuai dengan inputan user
             $hasil = $query->result();
 			//$this->CI->db->query("INSERT INTO `test` ( `pwd1` , `pwd2` ) VALUES ('".$this->CI->encrypt->decode($hasil[0]->password)."', '".$this->CI->encrypt->encode($pass)."');");
 			/*log_message('error',$pass);
 			log_message('error',$this->CI->encrypt->encode($pass));
 			log_message('error',json_encode($hasil[0]->password));
 			*/
-			if ($this->CI->encrypt->decode($hasil[0]->password) == $pass)
+			if ($this->CI->encrypt->decode($hasil[0]->password) == $pass)   //pengecekan password
             {
 				if ($hasil[0]->active == "1") {
 	      			return $hasil[0];
