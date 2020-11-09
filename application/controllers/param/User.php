@@ -23,13 +23,16 @@ class User extends CI_Controller {
         $this->menuactsub = "user";
 	}
 	
-	//---- Halaman Setup User
+    //---- Halaman Setup User
+    //fitur wewenang, bisa diakses oleh admin
     function index()
 	{
         $data['idpeg'] = $this->session->userdata('username');
         $data['menunya'] = $this->authlib->loadMenu('0',$this->nama_group,$this->menuact,$this->menuactsub);
         $data['tema'] = $this->tema;
         $data['layanancontr'] =  array('' => 'Welcome','setortunai' => 'Setor Tunai','tariktunai' => 'Tarik Tunai','setordeposito' => 'Setor Deposito','pencairandeposito' => 'Pencairan Deposito','pencairanpembiayaan' => 'Pencairan Pembiayaan','angsuran' => 'Setor angsuran','lapmutasi' => 'Laporan mutasi','hapustransaksi' => 'Hapus Transaksi','help' => 'Help','profile' => 'Profile');
+        
+        //semua fungsi untuk mendapatkan list controller sudah dijelaskan
         $data['paramcontr'] = $this->_scanControllerParam();
         $data['basecontr'] = $this->_scanControllerBase();
         $data['accountingcontr'] = $this->_scanControllerAccounting();
@@ -39,9 +42,11 @@ class User extends CI_Controller {
         $data['toolcontr'] = $this->_scanControllerTool();
         $this->load->view('param/user',$data);
 	}
+    
+    //fungsi load daftar menu
     function _loadMenuset($parent)
     {
-        $hasil = $this->master->getSetupMenu($parent);
+        $hasil = $this->master->getSetupMenu($parent);  //panggil model Master_model.php fungsi getSetupMenu
         if ($hasil)
         {
             $this->isi[] = "<ul>";
@@ -318,7 +323,7 @@ class User extends CI_Controller {
     {
         $data = $this->allfunct->securePost();
         $data['controller'] = serialize($data['controller']);
-        echo $this->master->simpan('groups',$data);
+        echo $this->master->simpan('groups',$data); //panggil model Master_model.php fungsi simpan
     }
 
     //---- Edit Group
@@ -329,16 +334,17 @@ class User extends CI_Controller {
 		unset($data['id']);
         $where = array('group_id' => $id);
         $data['controller'] = serialize($data['controller']);
-        echo $this->master->update("groups",$data,$where);
+        echo $this->master->update("groups",$data,$where); //panggil model Master_model.php fungsi update
     }
 
     //---- Hapus group
     function delGroup()
     {
         $where = array('group_id' => $this->input->post('id'));
-        echo  $this->master->delete("groups",$where);
+        echo  $this->master->delete("groups",$where); //panggil model Master_model.php fungsi delete
     }
 
+    //fungsi untuk get grup
     function get_group()
     {
         $ff			= $this->input->post('ff'); // Jenis Filter
@@ -348,7 +354,7 @@ class User extends CI_Controller {
 		$hal		= $this->input->post('hal'); // Offset Limit
 		$juml		= $this->input->post('juml'); // Jumlah Limit
 		$awal 		= $juml * ($hal - 1);
-		$alldata 	= $this->modelku->getAllGroup($ff,$if,$fd,$adsc,$awal,$juml);
+		$alldata 	= $this->modelku->getAllGroup($ff,$if,$fd,$adsc,$awal,$juml); //panggil model Admin_model.php
 		$records 	= $alldata['numrow'];
 		$page_num 	= ceil($records / $juml);
         if ($records > 0)

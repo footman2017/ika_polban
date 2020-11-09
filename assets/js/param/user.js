@@ -14,7 +14,7 @@ $(document).ready(function(){
     $("#tab-utama").tabs();
     getmenu();
     function getmenu() {
-        respon = ajak("param/user/getMenu");
+        respon = ajak("param/user/getMenu");    //panggil fungsi untuk mendapatkan data daftar menu di fungsi getMenu controller User.php
         $('#imenu').html(respon);
         $('.macte,.medte').css('cursor','pointer');
             //-- Toogle Active
@@ -205,7 +205,8 @@ $(document).ready(function(){
      $('#dialog-hapus-user').dialog({autoOpen: false,width: 500,modal: true,
         buttons: {
                     "Ok": function() {
-                        respon = ajak("param/user/delUser","id=" + jAmbil("idx"));
+                        //proses hapus group
+                        respon = ajak("param/user/delUser","id=" + jAmbil("idx"));  //memanggil fungsi delUser di controller User.php
                         if (respon == "1") {
                             $("#table_user .reset").click();;
                             $(this).dialog('close');
@@ -366,16 +367,16 @@ $(document).ready(function(){
 /*
  *  --------------------- GROUP -----------------------------------------
  */
-   //---- Dialog Tambah group
+   //---- Dialog Tambah group : proses tambah group
     $('#dialog-group').dialog({autoOpen: false,width: 400,modal: true,
         buttons: {
                     "Ok": function() {
                         hasil = validform("form_group");
                         if (hasil['isi'] != "invalid" && ($('#form_group .slct').val() != null)) {
                             if ($('#dialog-group').dialog('option', 'title') == "Tambah Group") {
-                                respon = ajak("param/user/saveGroup",$('#form_group').serialize());
+                                respon = ajak("param/user/saveGroup",$('#form_group').serialize()); //proses save memanggil fungsi saveGroup di controller User.php
                             } else {
-                                respon = ajak("param/user/editGroup",$('#form_group').serialize() + "&id=" + jAmbil("idx"));
+                                respon = ajak("param/user/editGroup",$('#form_group').serialize() + "&id=" + jAmbil("idx")); //proses edit group
                             }
                             if (respon == "1") {
                                 $(this).dialog("close");
@@ -431,13 +432,15 @@ $(document).ready(function(){
           }
      });
 
-     //---- Tabel group
+     //----Pembuatan Tabel group
     $("#table_group").mastertable({
-        urlGet:"param/user/get_group",
+        urlGet:"param/user/get_group",  //memanggil fungsi get_grup di controller User.php
         flook:"nama_group"
     },
     function(hal,juml,json) {
         var isi="";
+        
+        //proses pembuatan tabel list group
         for(i = 0; i < json['alldata'].length; i++) {
             idx = "g" + json['alldata'][i].group_id;
             dtx = json['alldata'][i];

@@ -1128,6 +1128,7 @@ class Admin_model extends CI_Model {
 	}
 
     // --- Mendapatkan User.
+    //untuk mendapatkan grup, data nantinya ditampilkan di fitur wewenang tab group wewenang
 	function getAllGroup($ff,$isf,$fd,$ADsc,$awal,$jum)
     {
 		if ($isf == "") {

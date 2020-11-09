@@ -120,17 +120,21 @@
                     <div class="row-fluid">
                         <div class="span12">
                             <div class="tabbable tabbable-custom boxless">
+                                <!-- Pilihan tabnya -->
                                 <ul class="nav nav-tabs">
                                    <li class="active"><a href="#tabs-1" data-toggle="tab">Groups wewenang</a></li>
                                    <li><a href="#tabs-2" data-toggle="tab">Menu otoritas</a></li>
                                 </ul>
                                 <div class="tab-content">
+                                    <!-- Tab pertama yang menampilkan Grup wewenang -->
                                     <div class="tab-pane active" id="tabs-1">
                                         <div class="widget box blue">
                                             <div class="widget-title">
                                                <h4><i class="icon-reorder"></i>Groups wewenang</h4>
                                             </div>
                                             <div id="table_group">
+                                                <!-- Cara menampilkan tabel sepertinya masih cara lama, belum memakai library seperti datatable
+                                                sehingga sedikit kompleks (sumpah man cara buat tabel nya aneh banget) -->
                                                 <?php
                                                 $group['option'][] = array("nama_group","Nama Group"); // value,title
                                                 $group['tombol'] = '<button id="addgroup" class="btn btn-success">Tambah Group <i class="icon-plus"></i></button>';
@@ -139,13 +143,15 @@
                                                 $group['tabel_head'][] = array("","25%","Controller");
                                                 $group['tabel_head'][] = array("","10%","Manage");
                                                 $group['tabel_head'][] = array("group_id","5%","ID");
-                                                $this -> load -> view( 'filter_layout',$group );
+                                                $this -> load -> view( 'filter_layout',$group );     // filter search, manggil view filter_layout.php
                                                 $this -> load -> view( 'table_layout',$group );
                                                 $this -> load -> view( 'paging_layout',$group );
                                                 ?>
+                                                <!-- untuk pengambilan datanya ada di user.js di baris 436 sampai 494 -->
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- tab menu otoritas -->
                                     <div class="tab-pane " id="tabs-2">
                                         <div class="widget box blue">
                                             <div class="widget-title">
@@ -154,7 +160,7 @@
                                             <br>
                                             <div class="row-fluid">
                                                 <h3>Daftar Menu :</h3>
-                                               <div id="imenu"></div>
+                                               <div id="imenu"></div>   <!-- Disini tempat list Daftar menu, untuk datanya di load di user.js baris 16 -->
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +178,7 @@
 			<span class="go-top"><i class="icon-arrow-up"></i></span>
 		</div>
 	</div>
-<!-- Dialog Area -->
+<!-- Dialog/modal Area -->
 <div id="dialog-user">
       <form id="form_user" method="post">
         <fieldset>
@@ -230,6 +236,7 @@
         <p class="infonya"></p>
     </form>
 </div>
+<!-- modal hapus group, proses hapusnya bisa di lihat di user.js line 205 -220-->
 <div id="dialog-hapus-user">
       <br /><h3><img src="assets/images/question.png">&nbsp;Anda yakin <span class="phps"></span> akan dihapus ?</h3>
 </div>
@@ -242,6 +249,7 @@
             </div>
             <div class="fm-req">
               <label>Controller :</label>
+              <!-- proses pembuatan dropdown controller, data dikirimkan dari controller User.php fungsi index -->
               <select size="15" class="slct" multiple="multiple" name="controller[]">
                  <optgroup label="Transaksi">
                  <?php foreach($layanancontr as $key => $item):?>
